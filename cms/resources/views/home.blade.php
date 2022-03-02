@@ -1,13 +1,23 @@
-<!DOCTYPE html>
-<html>
-<head>
-	<title>RosiLatansa|welcome-page</title>
-</head>
-<body>
+@extends('layouts.app')
 
-	<h3>HI! WELCOME TO OUR LARAVEL WEBSITE</h3>
-	<p>Learn Routes and View Laravel 8</p>
-	<p><i>by @RosiLatansaSalsabela</i></p>
+@section('content')
+<div class="container">
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card">
+                <div class="card-header">{{ __('Dashboard') }}</div>
 
-</body>
-</html>
+                <div class="card-body">
+                    @if (session('status'))
+                        <div class="alert alert-success" role="alert">
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    {{ __('You are logged in!') }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
