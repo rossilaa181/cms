@@ -110,44 +110,56 @@ Route::get('/cache-clear', function() {
 // -----------------------------------------------
 // PRAKTIKUM VIEW 
 // --------------------------------------------------
-Route::get('/hello', function () {
-    return view('hello', ['name' => 'Andi']);
-});
+// Route::get('/hello', function () {
+//     return view('hello', ['name' => 'Andi']);
+// });
 
+// // load index page
+// Route::get('/index', function () {
+//     return view('index');
+// });
+// // load abaou-us page
+// Route::get('/about-us', function () {
+//     return view('about-us');
+// });
+// // load howitworks page
+// Route::get('/howitworks', function () {
+//     return view('howitworks');
+// });
+
+// Route::get('/cms', function () {
+//     return view('cms');
+// });
+
+// Route::get('/category', function () {
+//     return view('category');
+// });
+
+// Route::get('/cooming-soon', function () {
+//     return view('cooming-soon');
+// });
+
+// Route::get('/pricing', function () {
+//     return view('pricing');
+// });
+
+// Route::get('/productpage', function () {
+//     return view('productpage');
+// });
+
+// Route::get('/profile', function () {
+//     return view('profile');
+// });
+
+// -----------------------------------------------
+// PRAKTIKUM MODEL
+// --------------------------------------------------
 // load index page
-Route::get('/index', function () {
-    return view('index');
-});
-// load abaou-us page
-Route::get('/about-us', function () {
-    return view('about-us');
-});
-// load howitworks page
-Route::get('/howitworks', function () {
-    return view('howitworks');
-});
-
-Route::get('/cms', function () {
-    return view('cms');
-});
-
-Route::get('/category', function () {
-    return view('category');
-});
-
-Route::get('/cooming-soon', function () {
-    return view('cooming-soon');
-});
-
-Route::get('/pricing', function () {
-    return view('pricing');
-});
-
-Route::get('/productpage', function () {
-    return view('productpage');
-});
-
-Route::get('/profile', function () {
-    return view('profile');
-});
-
+// Route::get('/index/{slug}', function () {
+//     return view('productpage')
+//     ->name('category');
+// });
+// // URL /
+Route::get('/index', [HomeController::class,'index']);
+Route::get('/{slug}', [HomeController::class,'show'])
+        ->name('category'); //using route by name to load page from view

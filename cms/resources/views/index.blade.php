@@ -30,7 +30,7 @@
             </div>
          </div>
          <div class="row clearfix">
-            <div class="col-lg-3 col-sm-6 col-md-3">
+            <!-- <div class="col-lg-3 col-sm-6 col-md-3">
                <a href="productpage">
                   <div class="box-img">
                      <h4>Product</h4>
@@ -93,13 +93,25 @@
                      <img src="{{url('assets/images/product/13.png')}}" alt="" />
                   </div>
                </a>
-            </div>
-            <div class="categories_link">
-               <a href="#">Browse all categories here</a>
-            </div>
+            </div> -->
+
+         @foreach ($categories as $category)
+         <div class="col-lg-3 col-sm-6 col-md-3">
+            <a href="{{ route('category', ['slug' => $category->slug]) }}">
+               <div class="box-img">
+                  <h4>{{ $category->title }}</h4>
+                  <img src="{{ $category->image }}" alt="" />
+               </div>
+            </a>
+         </div>
+         @endforeach
+
+         <div class="categories_link">
+            <a href="#">Browse all categories here</a>
          </div>
       </div>
    </div>
+</div>
 </div>
 <div class="cat-main-box">
    <div class="container">
