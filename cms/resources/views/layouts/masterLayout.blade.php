@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html lang="en">
+<!-- <html lang="en"> -->
+<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
    <meta charset="UTF-8">
@@ -19,8 +20,19 @@
    <link rel="stylesheet" href="{{url('assets/css/slick.min.css')}}">
    <link rel="stylesheet" href="{{url('assets/css/pricing.css')}}">
    <!--responsive css-->
-   <link rel="stylesheet" href="css/responsive.css">
+   <link rel="stylesheet" href="{{url('assets/css/responsive.css')}}">
    <script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"></script>
+
+   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <!-- CSRF Token -->
+    <meta name="csrf-token" content="{{ csrf_token() }}">
+    <!-- Scripts -->
+    <script src="{{ asset('js/app.js') }}" defer></script>
+    <!-- Fonts -->
+    <link rel="dns-prefetch" href="//fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css?family=Nunito" rel="stylesheet">
+
 </head>
 
 <body>
@@ -28,8 +40,8 @@
       <!-- Static navbar -->
       <nav class="navbar navbar-default">
          <div class="container-fluid">
-            <div class="row">
-               <div class="col-md-4 col-sm-12 left-rs">
+           
+               <div class="col-md-5 col-sm-12 left-rs">
                   <div class="navbar-header">
                      <button type="button" id="top-menu" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false">
                         <span class="sr-only">Toggle navigation</span>
@@ -45,13 +57,44 @@
                      </div>
                   </form>
                </div>
-               <div class="col-md-8 col-sm-12">
+               <div class="col-md-7 col-sm-12">
                   <div class="right-nav">
                      <div class="login-sr">
                         <div class="login-signup">
                            <ul>
-                              <li><a href="#">Login</a></li>
-                              <li><a class="custom-b" href="#">Sign up</a></li>
+                              <!-- <li><a href="#">Login</a></li>
+                              <li><a class="custom-b" href="#">Sign up</a></li> -->
+                              <!-- Authentication Links -->
+                              @guest
+                              @if (Route::has('login'))
+                              <li class="nav-item">
+                                 <a class="nav-link" href="{{ route('login') }}">{{ __('Login') }}</a>
+                              </li>
+                              @endif
+
+                              @if (Route::has('register'))
+                              <li class="nav-item">
+                                 <a class="custom-b" href="{{ route('register') }}">{{ __('Register') }}</a>
+                              </li>
+                              @endif
+                              @else
+                              <li class="nav-item dropdown">
+                                 <a id="navbarDropdown" class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" v-pre>
+                                    {{ Auth::user()->name }}
+                                 </a>
+
+                                 <div class="dropdown-menu dropdown-menu-end" aria-labelledby="navbarDropdown">
+                                    <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault();
+                                                     document.getElementById('logout-form').submit();">
+                                       {{ __('Logout') }}
+                                    </a>
+
+                                    <form id="logout-form" action="{{ route('logout') }}" method="POST" class="d-none">
+                                       @csrf
+                                    </form>
+                                 </div>
+                              </li>
+                              @endguest
                            </ul>
                         </div>
                      </div>
@@ -73,7 +116,7 @@
                      </div>
                   </div>
                </div>
-            </div>
+        
          </div>
          <!--/.container-fluid -->
       </nav>

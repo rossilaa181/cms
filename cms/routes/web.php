@@ -1,13 +1,15 @@
 <?php
 
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\PageController;
+use Illuminate\Support\Facades\Artisan;
 use App\Http\Controllers\HomeController;
+use App\Http\Controllers\NewsController;
+use App\Http\Controllers\PageController;
 use App\Http\Controllers\AboutController;
 use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\ProductsController;
 use App\Http\Controllers\ProgramController;
-use App\Http\Controllers\NewsController;
+use App\Http\Controllers\ProductsController;
 
 /*
 |--------------------------------------------------------------------------
@@ -21,7 +23,7 @@ use App\Http\Controllers\NewsController;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('home');
 });
 
 
@@ -97,16 +99,17 @@ Route::get('/', function () {
 //     echo "Email : 2041720026@student.polinema.ac.id";
 // }) -> name('about');
 
-// Auth::routes();
 
-// Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
-
+// -----------------------------
 // clear CACHE
+// -----------------------------
 Route::get('/cache-clear', function() {
     Artisan::call('cache:clear');
   
     dd("cache clear All");
 });
+
+
 // -----------------------------------------------
 // PRAKTIKUM VIEW 
 // --------------------------------------------------
@@ -115,51 +118,57 @@ Route::get('/cache-clear', function() {
 // });
 
 // // load index page
-// Route::get('/index', function () {
-//     return view('index');
-// });
-// // load abaou-us page
-// Route::get('/about-us', function () {
-//     return view('about-us');
-// });
-// // load howitworks page
-// Route::get('/howitworks', function () {
-//     return view('howitworks');
-// });
+Route::get('/index', function () {
+    return view('index');
+});
+// load abaou-us page
+Route::get('/about-us', function () {
+    return view('about-us');
+});
+// load howitworks page
+Route::get('/howitworks', function () {
+    return view('howitworks');
+});
 
-// Route::get('/cms', function () {
-//     return view('cms');
-// });
+Route::get('/cms', function () {
+    return view('cms');
+});
 
-// Route::get('/category', function () {
-//     return view('category');
-// });
+Route::get('/category', function () {
+    return view('category');
+});
 
-// Route::get('/cooming-soon', function () {
-//     return view('cooming-soon');
-// });
+Route::get('/cooming-soon', function () {
+    return view('cooming-soon');
+});
 
-// Route::get('/pricing', function () {
-//     return view('pricing');
-// });
+Route::get('/pricing', function () {
+    return view('pricing');
+});
 
-// Route::get('/productpage', function () {
-//     return view('productpage');
-// });
+Route::get('/productpage', function () {
+    return view('productpage');
+});
 
-// Route::get('/profile', function () {
-//     return view('profile');
-// });
+Route::get('/profile', function () {
+    return view('profile');
+});
 
 // -----------------------------------------------
 // PRAKTIKUM MODEL
 // --------------------------------------------------
 // load index page
-// Route::get('/index/{slug}', function () {
-//     return view('productpage')
-//     ->name('category');
-// });
-// // URL /
-Route::get('/index', [HomeController::class,'index']);
-Route::get('/{slug}', [HomeController::class,'show'])
-        ->name('category'); //using route by name to load page from view
+Route::get('/', [HomeController::class,'index']);
+Route::get('/home', [HomeController::class,'index']);
+// Route::get('/{slug}', [HomeController::class,'show'])
+//         ->name('category'); //using route by name to load page from view
+
+
+// ============================= PRAKTIKUM 5 ============================
+// -----------------------------
+// DEFAULT ROUTES AUTHENTICATION
+// -----------------------------
+Auth::routes();
+
+Route::get('/home', [App\Http\Controllers\HomeController::class, 'index'])->name('home');
+
