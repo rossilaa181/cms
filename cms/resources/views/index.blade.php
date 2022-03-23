@@ -95,23 +95,24 @@
                </a>
             </div> -->
 
-         @foreach ($categories as $category)
-         <div class="col-lg-3 col-sm-6 col-md-3">
-            <a href="{{ route('category', ['slug' => $category->slug]) }}">
-               <div class="box-img">
-                  <h4>{{ $category->title }}</h4>
-                  <img src="{{ $category->image }}" alt="" />
-               </div>
-            </a>
-         </div>
-         @endforeach
+            @foreach ($categories as $category)
+            <div class="col-lg-3 col-sm-6 col-md-3">
 
-         <div class="categories_link">
-            <a href="#">Browse all categories here</a>
+               <a href="../productpage">
+                  <div class="box-img">
+                     <h4>{{ $category->title }}</h4>
+                     <img src="{{ $category->image }}" alt="" />
+                  </div>
+               </a>
+            </div>
+            @endforeach
+
+            <div class="categories_link">
+               <a href="#">Browse all categories here</a>
+            </div>
          </div>
       </div>
    </div>
-</div>
 </div>
 <div class="cat-main-box">
    <div class="container">
@@ -152,6 +153,21 @@
       </div>
    </div>
 </div>
+<!-- Tabel identity user login -->
+<table class="table tab-responsive">
+   <tr>
+      <th>Username</th><th>:</th><td>{{$user->username}}</td>
+   </tr>
+   <tr>
+      <th>Name</th><th>:</th><td>{{$user->name}}</td>
+   </tr>
+   <tr>
+      <th>Email</th><th>:</th><td>{{$user->email}}</td>
+   </tr>
+   <tr>
+      <th>Created At</th><th>:</th><td>{{$user->created_at}}</td>
+   </tr>
+</table>
 <div class="products_exciting_box">
    <div class="container">
       <div class="row">
