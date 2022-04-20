@@ -70,9 +70,13 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function edit(Article $article)
+    public function edit($id)
     {
-        //
+        //menampilkan form  edit
+        $article = Article::find($id);
+
+        return view('articles.edit', ['article' => $article]);
+        //noted : 'article' merupakan parameter yang melempar nilai ke form edit, sehingga haru sama penulisan nama variabel dengan parameter di controller
     }
 
     /**
@@ -82,9 +86,23 @@ class ArticleController extends Controller
      * @param  \App\Models\Article  $article
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Article $article)
+    public function update(Request $request, $id)
     {
-        //
+        //Update Data
+        $article = Article::find($id);
+
+        $article->title = $request->title;
+        $article->content = $request->content;
+
+        if($article->featured_image && file_exists(storage_path('app/public/'.$article->featured_image))){
+            Storage::delete('public/'.$article->featured_image);
+        }
+        $image_name=$request->file('image')->store('image','public');
+        $article->featured_image = $image_name;
+
+        $article->save();
+        return redirect()->route('articles.index')
+            ->with('success','Artikel Berhasil Diupdate');
     }
 
     /**
